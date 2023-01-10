@@ -8,29 +8,25 @@ namespace XadrezConsole
         {
             try
             {
-                PartidaXadrez partidaXadrez = new PartidaXadrez();
-                while (!partidaXadrez.Terminada)
+                PartidaXadrez partida = new PartidaXadrez();
+                while (!partida.Terminada)
                 {
                     try
                     {
                         Console.Clear();
-                        Tela.ImprimirTabuleiro(partidaXadrez.Tabuleiro);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: " + partidaXadrez.Turno);
-                        Console.WriteLine("Aguardando jogada: " + partidaXadrez.JogadorAtual);
+                        Tela.ImprimirPartida(partida);
                         Console.WriteLine();
                         Console.Write("Origem: ");
                         Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
-                        partidaXadrez.ValidarPosicaoOrigem(origem);
-
-                        bool[,] posicoesPossiveis = partidaXadrez.Tabuleiro.Peca(origem).MovimentosPossiveis();
+                        partida.ValidarPosicaoOrigem(origem);
+                        bool[,] posicoesPossiveis = partida.Tabuleiro.Peca(origem).MovimentosPossiveis();
                         Console.Clear();
-                        Tela.ImprimirTabuleiro(partidaXadrez.Tabuleiro,posicoesPossiveis);
+                        Tela.ImprimirTabuleiro(partida.Tabuleiro,posicoesPossiveis);
                         Console.WriteLine();
                         Console.Write("Destino: ");
                         Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
-                        partidaXadrez.ValidarPosicaoDestino(origem,destino);
-                        partidaXadrez.RealizaJogada(origem,destino);
+                        partida.ValidarPosicaoDestino(origem,destino);
+                        partida.RealizaJogada(origem,destino);
                     }
                     catch (TabuleiroException v)
                     {
