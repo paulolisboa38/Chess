@@ -1,9 +1,9 @@
 ﻿using XadrezConsole.tabuleiro;
 namespace XadrezConsole.xadrez
 {
-    internal class Torre : Peca
+    internal class Dama : Peca
     {
-        public Torre (Cor cor,Tabuleiro tabuleiro)
+        public Dama (Cor cor,Tabuleiro tabuleiro)
             : base(cor,tabuleiro)
         {
         }
@@ -60,11 +60,55 @@ namespace XadrezConsole.xadrez
                 }
                 pos.Coluna = pos.Coluna - 1;
             }
+            //no
+            pos.DefinirValores(Posicao.Linha - 1,Posicao.Coluna - 1);
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                matriz[pos.Linha,pos.Coluna] = true;
+                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
+                {
+                    break;
+                }
+                pos.DefinirValores(Posicao.Linha - 1,Posicao.Coluna - 1);
+            }
+            //ne
+            pos.DefinirValores(Posicao.Linha - 1,Posicao.Coluna + 1);
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                matriz[pos.Linha,pos.Coluna] = true;
+                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
+                {
+                    break;
+                }
+                pos.DefinirValores(Posicao.Linha - 1,Posicao.Coluna + 1);
+            }
+            //se
+            pos.DefinirValores(Posicao.Linha + 1,Posicao.Coluna + 1);
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                matriz[pos.Linha,pos.Coluna] = true;
+                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
+                {
+                    break;
+                }
+                pos.DefinirValores(Posicao.Linha + 1,Posicao.Coluna + 1);
+            }
+            //so
+            pos.DefinirValores(Posicao.Linha + 1,Posicao.Coluna - 1);
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                matriz[pos.Linha,pos.Coluna] = true;
+                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
+                {
+                    break;
+                }
+                pos.DefinirValores(Posicao.Linha + 1,Posicao.Coluna - 1);
+            }
             return matriz;
         }
         public override string? ToString ()
         {
-            return "T";
+            return "D";
         }
     }
 }
